@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: gestao-pedidos-clientes
+  profiles:
+    active: test
+  datasource:
+    url: jdbc:postgresql://localhost:5432/multidb
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/multidb

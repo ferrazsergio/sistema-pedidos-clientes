@@ -1,0 +1,48 @@
+services:
+  multidbpostgres:
+    image: postgres:16.3
+    container_name: multidbpostgres
+    networks:
+      - multidb-network
+    ports:
+      - "5433:5432"
+    env_file:
+      - ./config/postgres.env
+
+  pgadmin:
+    image: dpage/pgadmin4:8.9
+    container_name: pgadmin4
+    networks:
+      - multidb-network
+    ports:
+      - "15432:80"
+    env_file:
+      - ./config/postgres-pgadmin.env
+      # extra_hosts:
+      # - "host.docker.internal:host-gateway"  Isto permite acessar a máquina host
+
+  multidbmongo:
+    image: mongodb/mongodb-community-server:latest
+    container_name: multidbmongo
+    networks:
+      - multidb-network
+    ports:
+      - "27017:27017"
+    env_file:
+      - ./config/mongodb.env
+
+  mongoexpress:
+    image: mongo-express
+    container_name: mongoexpress
+    networks:
+      - multidb-network
+    ports:
+      - "8081:8081"
+    env_file:
+      - ./config/mongo-express.env
+    environment:
+      ME_CONFIG_BASICAUTH: "true"
+
+networks:
+  multidb-network:
+    driver: bridge
