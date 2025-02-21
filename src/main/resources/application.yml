@@ -4,7 +4,7 @@ spring:
   profiles:
     active: test
   datasource:
-    url: jdbc:postgresql://localhost:5432/multidb
+    url: jdbc:postgresql://localhost:5432/multidb?user=postgres&password=postgres
     username: postgres
     password: postgres
     driver-class-name: org.postgresql.Driver
@@ -20,3 +20,6 @@ spring:
   data:
     mongodb:
       uri: mongodb://localhost:27017/multidb
+
+  main:
+    allow-bean-definition-overriding: true
